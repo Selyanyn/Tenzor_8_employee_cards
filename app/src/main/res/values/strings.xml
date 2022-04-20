@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">8_recycler_tiles</string>
+    <string name="delete_button_text">Удалить</string>
 </resources>
