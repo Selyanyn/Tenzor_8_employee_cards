@@ -11,4 +11,10 @@ class MainActivityViewModel : ViewModel() {
             add(Employee.getMockEmployees().random())
         }
     }
+
+    fun deleteEmployee(position: Int) {
+        employees.value = employees.value?.toMutableList()?.apply {
+            removeAt(position)
+        }
+    }
 }

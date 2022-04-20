@@ -9,7 +9,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainActivityViewModel = MainActivityViewModel()
 
-    private val employeesAdapter = EmployeeAdapter()
+    //если ломается 37 минута
+    private val employeesAdapter = EmployeeAdapter(viewModel::deleteEmployee)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

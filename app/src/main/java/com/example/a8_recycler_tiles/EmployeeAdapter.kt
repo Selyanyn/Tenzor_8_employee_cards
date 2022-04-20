@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class EmployeeAdapter: RecyclerView.Adapter<EmployeeAdapter.EmployeesViewHolder>() {
+class EmployeeAdapter(private val deleteAction: (Int) -> Unit): RecyclerView.Adapter<EmployeeAdapter.EmployeesViewHolder>() {
     class EmployeesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.name)
         val photoImageView: ImageView = itemView.findViewById(R.id.photo)
@@ -34,6 +34,10 @@ class EmployeeAdapter: RecyclerView.Adapter<EmployeeAdapter.EmployeesViewHolder>
                 .load(employee.photoUrl)
                 .centerCrop()
                 .into(photoImageView)
+
+            deleteButtonView.setOnClickListener {
+                deleteAction(position)
+            }
         }
     }
 
