@@ -1,5 +1,6 @@
 package com.example.a8_recycler_tiles
 
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ class EmployeeAdapter(private val deleteAction: (Int) -> Unit): RecyclerView.Ada
         val photoImageView: ImageView = itemView.findViewById(R.id.photo)
         val departmentTextView: TextView = itemView.findViewById(R.id.department)
         val deleteButtonView: Button = itemView.findViewById(R.id.delete_button)
+        val likeImage: ImageView = itemView.findViewById(R.id.like_image)
     }
 
     private val employeesList = mutableListOf<Employee>()
@@ -31,6 +33,10 @@ class EmployeeAdapter(private val deleteAction: (Int) -> Unit): RecyclerView.Ada
             nameTextView.text = employee.fullName
             departmentTextView.text = employee.department
 
+            var color = 0x60606060
+            if (employee.isLiked) color = 0xFFFF0040.toInt()
+            likeImage.background = ColorDrawable(color)
+
             Glide.with(photoImageView.context)
                 .load(employee.photoUrl)
                 .centerCrop()
@@ -39,6 +45,11 @@ class EmployeeAdapter(private val deleteAction: (Int) -> Unit): RecyclerView.Ada
             deleteButtonView.setOnClickListener {
                 deleteAction(position)
                 notifyItemRangeChanged(position, employeesList.size)
+            }
+
+            likeImage.setOnClickListener {
+                employee.isLiked = !employee.isLiked
+                notifyItemChanged(position)
             }
         }
     }
