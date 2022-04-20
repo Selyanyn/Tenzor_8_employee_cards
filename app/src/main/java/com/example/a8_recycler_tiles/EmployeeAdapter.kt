@@ -17,7 +17,7 @@ class EmployeeAdapter: RecyclerView.Adapter<EmployeeAdapter.EmployeesViewHolder>
         val deleteButtonView: Button = itemView.findViewById(R.id.delete_button)
     }
 
-    private val employeesList = Employee.getMockEmployees()
+    private val employeesList = mutableListOf<Employee>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeAdapter.EmployeesViewHolder {
         val employeeElement = LayoutInflater.from(parent.context).inflate(R.layout.employee_item, parent, false)
@@ -39,6 +39,12 @@ class EmployeeAdapter: RecyclerView.Adapter<EmployeeAdapter.EmployeesViewHolder>
 
     override fun getItemCount(): Int {
         return employeesList.size
+    }
+
+    fun reload(data: List<Employee>) {
+        employeesList.clear()
+        employeesList.addAll(data)
+        notifyDataSetChanged()
     }
 
 }
