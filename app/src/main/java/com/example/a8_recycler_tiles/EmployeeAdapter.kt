@@ -38,6 +38,7 @@ class EmployeeAdapter(private val deleteAction: (Int) -> Unit): RecyclerView.Ada
 
             deleteButtonView.setOnClickListener {
                 deleteAction(position)
+                notifyItemRangeChanged(position, employeesList.size)
             }
         }
     }
