@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -46,9 +47,12 @@ class EmployeeAdapter(private val deleteAction: (Int) -> Unit): RecyclerView.Ada
     }
 
     fun reload(data: List<Employee>) {
+        val employeesDiffResult = DiffUtil.calculateDiff(EmployeesDiffUtilCallback(
+            data, employeesList
+        ))
         employeesList.clear()
         employeesList.addAll(data)
-        notifyDataSetChanged()
+        employeesDiffResult.dispatchUpdatesTo(this)
     }
 
 }
