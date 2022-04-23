@@ -1,6 +1,7 @@
 package com.example.a8_recycler_tiles
 
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class EmployeeAdapter(private val deleteAction: (Int) -> Unit): RecyclerView.Adapter<EmployeeAdapter.EmployeesViewHolder>() {
+class EmployeeAdapter(private val deleteAction: (Int) -> Unit,
+                      private val likeAction: (Int) -> Unit): RecyclerView.Adapter<EmployeeAdapter.EmployeesViewHolder>() {
     class EmployeesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.name)
         val photoImageView: ImageView = itemView.findViewById(R.id.photo)
@@ -33,9 +35,9 @@ class EmployeeAdapter(private val deleteAction: (Int) -> Unit): RecyclerView.Ada
             nameTextView.text = employee.fullName
             departmentTextView.text = employee.department
 
-            var color = 0x60606060
-            if (employee.isLiked) color = 0xFFFF0040.toInt()
-            likeImage.background = ColorDrawable(color)
+            var image = R.drawable.unliked
+            if (employee.isLiked) image = R.drawable.liked
+            likeImage.setImageResource(image)
 
             Glide.with(photoImageView.context)
                 .load(employee.photoUrl)
@@ -43,13 +45,13 @@ class EmployeeAdapter(private val deleteAction: (Int) -> Unit): RecyclerView.Ada
                 .into(photoImageView)
 
             deleteButtonView.setOnClickListener {
-                deleteAction(position)
-                notifyItemRangeChanged(position, employeesList.size)
+                deleteAction(employee.id)
+                //notifyItemRangeChanged(position, employeesList.size)
             }
 
             likeImage.setOnClickListener {
                 employee.isLiked = !employee.isLiked
-                notifyItemChanged(position)
+                notifyItemChanged(holder.layoutPosition)
             }
         }
     }

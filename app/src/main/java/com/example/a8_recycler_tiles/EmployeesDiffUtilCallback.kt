@@ -18,6 +18,9 @@ class EmployeesDiffUtilCallback(
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition] == newList[newItemPosition]
+        return oldList[oldItemPosition].fullName == newList[newItemPosition].fullName
+                && oldList[oldItemPosition].department == newList[newItemPosition].department
+                && oldList[oldItemPosition].photoUrl == newList[newItemPosition].photoUrl
+                && oldList[oldItemPosition].isLiked == newList[newItemPosition].isLiked
     }
 }

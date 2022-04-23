@@ -1,20 +1,34 @@
 package com.example.a8_recycler_tiles
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainActivityViewModel : ViewModel() {
-    val employees = MutableLiveData(Employee.getMockEmployees())
+    val employees = MutableLiveData(listOf(
+        Employee.getRandomMockEmployee(),
+        Employee.getRandomMockEmployee(),
+        Employee.getRandomMockEmployee()
+    ))
 
     fun addRandomEmployee() {
         employees.value = employees.value?.toMutableList()?.apply {
-            add(Employee.getMockEmployees().random())
+            val randomEmployee = Employee.getRandomMockEmployee()
+            add(randomEmployee)
         }
     }
 
-    fun deleteEmployee(position: Int) {
+    fun likeEmployee(id: Int) {
         employees.value = employees.value?.toMutableList()?.apply {
-            removeAt(position)
+            (filter { it.id == id }).forEach { it.isLiked = !it.isLiked }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun deleteEmployee(id: Int) {
+        employees.value = employees.value?.toMutableList()?.apply {
+            removeIf { it.id == id }
         }
     }
 }
