@@ -13,19 +13,19 @@ data class Employee(
             Employee(
                 0,
                 "Степан Хардович",
-                "https://i.kym-cdn.com/photos/images/newsfeed/000/839/199/8a9.jpg",
+                "https://memepedia.ru/wp-content/uploads/2019/09/do-it-again-meme.png",
                 "Страдальческий отдел"
             ),
             Employee(
                 1,
                 "Дед инсайд",
-                "https://stepik.org/static/frontend/topbar_logo.svg",
+                "https://i.kym-cdn.com/photos/images/newsfeed/000/839/199/8a9.jpg",
                 "Инсайдерский отдел"
             ),
             Employee(
                 2,
                 "Степик",
-                "https://memepedia.ru/wp-content/uploads/2019/09/do-it-again-meme.png",
+                "https://upload.wikimedia.org/wikipedia/commons/4/42/Stepik_logotype.png",
                 "Отдел по решанию онлайн-курсов"
             )
         )
